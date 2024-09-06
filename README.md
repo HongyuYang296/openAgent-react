@@ -55,7 +55,7 @@ In the package.json, the following scripts are available for building, running, 
 }
 ```
 
-### Getting Started
+# Getting Started
 ## Prerequisites
 Ensure you have the following installed:
 
