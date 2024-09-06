@@ -5,7 +5,7 @@ import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import DeleteIcon from '@mui/icons-material/Delete';
 
 interface Data {
-    id: number;
+  id: number;
   firstName: string;
   lastName: string;
   email: string;
@@ -17,8 +17,8 @@ interface Data {
 
 interface ActionMenuProps {
   data: Data;
-  updateContactStatusToVerified: (id: number) => Promise<void>; 
-  deleteContacts: (id: number) => Promise<void>; 
+  updateContactStatusToVerified: (id: number) => Promise<void>;
+  deleteContacts: (id: number) => Promise<void>;
 }
 
 const ActionMenu: React.FC<ActionMenuProps> = ({ data, updateContactStatusToVerified, deleteContacts }) => {

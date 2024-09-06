@@ -4,13 +4,13 @@ import axios from 'axios';
 const API_URL = 'http://localhost:8001/api/contacts';
 
 interface ContactFormValues {
-    firstName: string;
-    lastName: string;
-    email: string;
-    phone: string | undefined;
-    additionalInfo?: string;
-    time: string;
-  }
+  firstName: string;
+  lastName: string;
+  email: string;
+  phone: string | undefined;
+  additionalInfo?: string;
+  time: string;
+}
 
 // Function to get all contacts
 export const getContacts = async () => {
@@ -45,13 +45,13 @@ export const updateContactStatus = async (id: number) => {
   }
 };
 
-// Delete 
+// Delete
 export const deleteContact = async (id: number) => {
-    try {
-      const response = await axios.delete(`${API_URL}/${id}`);
-      return response.data;
-    } catch (error) {
-      console.error('Error deleting contact:', error);
-      throw error;
-    }
-  };
+  try {
+    const response = await axios.delete(`${API_URL}/${id}`);
+    return response.data;
+  } catch (error) {
+    console.error('Error deleting contact:', error);
+    throw error;
+  }
+};

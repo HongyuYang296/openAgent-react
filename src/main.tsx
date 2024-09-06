@@ -7,7 +7,7 @@ import { SnackbarProvider } from './assets/contexts/SnackbarManager';
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <SnackbarProvider>
-    <App />
+      <App />
     </SnackbarProvider>
   </StrictMode>
 );

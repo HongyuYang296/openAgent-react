@@ -28,7 +28,7 @@ const Hero: React.FC = () => {
             sell and own
           </Typography>
 
-          <Box mt={3} textAlign='center'>
+          <Box mt={3} textAlign="center">
             {/* GitHub Repo Button */}
             <Button
               variant="outlined"
@@ -38,7 +38,7 @@ const Hero: React.FC = () => {
               rel="noopener noreferrer"
               startIcon={<GitHubIcon />}
               fullWidth={isSmallScreen || isMediumScreen}
-              sx={{ py: 1.5}}
+              sx={{ py: 1.5 }}
             >
               GitHub Repo
             </Button>

@@ -41,7 +41,7 @@ export const SnackbarProvider: FC<SnackbarProviderProps> = ({ children }) => {
     if (snackPack.length && !messageInfo) {
       // Set a new snack when we don't have an active one
       setMessageInfo({ ...snackPack[0] });
-      setSnackPack((prev) => prev.slice(1));
+      setSnackPack(prev => prev.slice(1));
       setOpen(true);
     } else if (snackPack.length && messageInfo && open) {
       // Close an active snack when a new one is added
@@ -50,7 +50,7 @@ export const SnackbarProvider: FC<SnackbarProviderProps> = ({ children }) => {
   }, [snackPack, messageInfo, open]);
 
   const openSnackbar = (message: string, severity: AlertColor = 'info') => {
-    setSnackPack((prev) => [...prev, { message, severity, key: new Date().getTime() }]);
+    setSnackPack(prev => [...prev, { message, severity, key: new Date().getTime() }]);
   };
 
   const closeSnackbar = (event?: React.SyntheticEvent | Event, reason?: string) => {

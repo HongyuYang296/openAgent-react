@@ -1,7 +1,6 @@
 // src/components/ContactForm.tsx
 import React, { useState } from 'react';
 import { useFormik } from 'formik';
-import * as yup from 'yup';
 import {
   TextField,
   Grid,
@@ -20,7 +19,8 @@ import {
 import { allCountries } from 'country-telephone-data';
 import { formatDate } from '../untils/dateUtils';
 import { addContact } from '../untils/apiService';
-import successIcon from '../assets/image/correct.png'
+import successIcon from '../assets/image/correct.png';
+import { contactFormValidationSchema } from '../untils/validationSchemas'; // Import the validation schema
 
 interface ContactFormValues {
   firstName: string;
@@ -32,18 +32,9 @@ interface ContactFormValues {
   time: string;
 }
 
-const validationSchema = yup.object({
-  firstName: yup.string().required('First name is required'),
-  lastName: yup.string().required('Last name is required'),
-  email: yup.string().email('Enter a valid email').required('Email is required'),
-  countryCode: yup.string().required('CountryCode is required'),
-  phone: yup.string().required('Phone number is required').matches(/^\d+$/, 'Phone number must contain only digits'), // Ensure only digits are allowed
-  additionalInfo: yup.string()
-});
-
 const ContactForm: React.FC = () => {
   const [open, setOpen] = useState(false); // State to manage dialog visibility
-  const [dialogMessage, setDialogMessage] = useState(''); 
+  const [dialogMessage, setDialogMessage] = useState('');
 
   const handleClose = () => {
     setOpen(false);
@@ -59,28 +50,28 @@ const ContactForm: React.FC = () => {
       additionalInfo: '',
       time: ''
     },
-    validationSchema: validationSchema,
+    validationSchema: contactFormValidationSchema,
     onSubmit: async (values, { setSubmitting, resetForm }) => {
-    console.log(formik.errors); // Log current errors
+      console.log(formik.errors); // Log current errors
 
-    const combinedPhone = `${values.countryCode} ${values.phone}`;
-    const currentTime = formatDate(new Date());
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const { countryCode, ...rest } = values;
-    const submissionData = { ...rest, phone: combinedPhone, time: currentTime };
+      const combinedPhone = `${values.countryCode} ${values.phone}`;
+      const currentTime = formatDate(new Date());
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+      const { countryCode, ...rest } = values;
+      const submissionData = { ...rest, phone: combinedPhone, time: currentTime };
 
-    try {
-      const response = await addContact(submissionData);
-      setDialogMessage('Request successfully submitted!');
-      setOpen(true);
-      resetForm();
-      console.log('Contact successfully added:', response);
-    } catch (error) {
-      console.error('Error adding contact:', error);
-    } finally {
-      setSubmitting(false); 
+      try {
+        const response = await addContact(submissionData);
+        setDialogMessage('Request successfully submitted!');
+        setOpen(true);
+        resetForm();
+        console.log('Contact successfully added:', response);
+      } catch (error) {
+        console.error('Error adding contact:', error);
+      } finally {
+        setSubmitting(false);
+      }
     }
-  }
   });
 
   return (
@@ -221,21 +212,27 @@ const ContactForm: React.FC = () => {
         <Box display="flex" justifyContent="center" mb={2}>
           <img src={successIcon} alt="Success Icon" style={{ width: '100px', height: '100px' }} />
         </Box>
-        
+
         <DialogContent>
           <div style={{ textAlign: 'center' }}>
-          <h3>Thank you!</h3>
-          <p>{dialogMessage}</p>
+            <h3>Thank you!</h3>
+            <p>{dialogMessage}</p>
           </div>
         </DialogContent>
-        <DialogActions sx={{ justifyContent: 'center' }}> {/* Center the button */}
-          <Button onClick={handleClose} variant="contained" sx={{
-                backgroundColor: 'black', 
-                color: 'white', 
-                '&:hover': {
-                  backgroundColor: 'rgba(0, 0, 0, 0.8)' 
-                }
-              }}>
+        <DialogActions sx={{ justifyContent: 'center' }}>
+          {' '}
+          {/* Center the button */}
+          <Button
+            onClick={handleClose}
+            variant="contained"
+            sx={{
+              backgroundColor: 'black',
+              color: 'white',
+              '&:hover': {
+                backgroundColor: 'rgba(0, 0, 0, 0.8)'
+              }
+            }}
+          >
             OK
           </Button>
         </DialogActions>

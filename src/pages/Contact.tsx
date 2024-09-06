@@ -12,20 +12,20 @@ const MapIcon = LocationOnIcon;
 const PhoneIcon = LocalPhoneIcon;
 const ContactPage: React.FC = () => {
   return (
-    <Box component="main" sx={{ flexGrow: 1, p: 3, fontFamily: 'Gill Sans', }}>
-      <div style={{textAlign:'center'}}>
-      <Typography
-        variant="h4"
-        sx={{
-          mb: 1,
-          fontWeight: 'bold' // Applying bold font weight
-        }}
-      >
-        Contact
-      </Typography>
-      <Typography variant="h6" component="h1" sx={{ color: 'gray', mb: 1 }}>
-        We are here to help.
-      </Typography>
+    <Box component="main" sx={{ flexGrow: 1, p: 3, fontFamily: 'Gill Sans' }}>
+      <div style={{ textAlign: 'center' }}>
+        <Typography
+          variant="h4"
+          sx={{
+            mb: 1,
+            fontWeight: 'bold' // Applying bold font weight
+          }}
+        >
+          Contact
+        </Typography>
+        <Typography variant="h6" component="h1" sx={{ color: 'gray', mb: 1 }}>
+          We are here to help.
+        </Typography>
       </div>
       <Grid container spacing={6}>
         <Grid item xs={12} md={6}>

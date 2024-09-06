@@ -14,7 +14,7 @@ import {
 } from '@mui/material';
 import ActionMenu from './ActionMenu';
 import { useState, useEffect } from 'react';
-import { getContacts, updateContactStatus,  deleteContact} from '../untils/apiService';
+import { getContacts, updateContactStatus, deleteContact } from '../untils/apiService';
 import { useSnackbar } from '../assets/contexts/SnackbarManager';
 
 interface Column {
@@ -70,14 +70,10 @@ export default function StickyHeadTable() {
   const updateContactStatusToVerified = async (id: number) => {
     try {
       const response = await updateContactStatus(id);
-  
+
       if (response) {
         // Update contact status in the state to "Verified"
-        setRows(prevRows =>
-          prevRows.map(row =>
-            row.id === id ? { ...row, status: 'Verified' } : row
-          )
-        );
+        setRows(prevRows => prevRows.map(row => (row.id === id ? { ...row, status: 'Verified' } : row)));
         openSnackbar('Contact Status update successfully!', 'success');
       } else {
         console.error('Failed to update contact status');
@@ -89,8 +85,8 @@ export default function StickyHeadTable() {
 
   const deleteContacts = async (id: number) => {
     try {
-      const response = await deleteContact(id); 
-  
+      const response = await deleteContact(id);
+
       if (response) {
         setRows(prevContacts => prevContacts.filter(contact => contact.id !== id));
         openSnackbar('Contact deleted successfully!', 'success');
@@ -101,7 +97,6 @@ export default function StickyHeadTable() {
       console.error('Error deleting contact:', error);
     }
   };
-  
 
   const columns: readonly Column[] = [
     {
@@ -162,7 +157,11 @@ export default function StickyHeadTable() {
       minWidth: 100,
       align: 'center',
       render: (data: Data) => (
-        <ActionMenu data={data} updateContactStatusToVerified={updateContactStatusToVerified} deleteContacts={deleteContacts} />
+        <ActionMenu
+          data={data}
+          updateContactStatusToVerified={updateContactStatusToVerified}
+          deleteContacts={deleteContacts}
+        />
       )
     }
   ];
