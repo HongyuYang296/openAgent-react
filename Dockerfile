@@ -23,8 +23,8 @@ FROM nginx:alpine
 # Copy the build output from the builder stage
 COPY --from=builder /app/dist /usr/share/nginx/html
 
-# Expose port 3000
-EXPOSE 3000
+# Expose port 3001
+EXPOSE 3001
 
 # Start nginx
 CMD ["nginx", "-g", "daemon off;"]
