@@ -67,7 +67,7 @@ Vite (included in the project dependencies)
 Clone the repository from GitHub:
 
 ```bash
-git clone https://github.com/<your-username>/openAgent-react.git
+git clone https://github.com/HongyuYang296/openAgent-react.git
 cd openAgent-react
 ```
 
