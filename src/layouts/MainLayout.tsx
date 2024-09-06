@@ -37,7 +37,7 @@ const MainLayout: React.FC<LayoutProps> = ({ title }) => {
       </AppBar>
 
       {/* main content */}
-      <main style={{ marginTop: '64px', padding: '16px', maxWidth: '100vw', overflowX: 'hidden' }}>
+      <main style={{ marginTop: '80px', padding: '16px', maxWidth: '100vw', overflowX: 'hidden' }}>
         <Outlet />
       </main>
 

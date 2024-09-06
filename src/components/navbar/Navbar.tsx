@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { AppBar, Toolbar, IconButton, Menu, MenuItem, Button, Box } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
-import logo from '../../assets/image/file.png';
+import logo from '../../assets/image/logo.png';
 
 const Navbar: React.FC = () => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);

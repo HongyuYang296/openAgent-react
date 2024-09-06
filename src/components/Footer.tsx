@@ -5,9 +5,10 @@ const Footer: React.FC = () => {
     <footer>
       <p>
         Made by{' '}
-        <a href="https://web3templates.com" target="_blank" rel="noopener noreferrer" className="hover:underline">
-          Hongyu Yang
-        </a>
+        <a href="https://www.linkedin.com/in/hongyu-yang-481037209" target="_blank" rel="noopener noreferrer" className="hover:underline">
+  Hongyu Yang
+</a>
+
       </p>
     </footer>
   );

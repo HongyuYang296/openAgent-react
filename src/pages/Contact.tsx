@@ -12,25 +12,27 @@ const MapIcon = LocationOnIcon;
 const PhoneIcon = LocalPhoneIcon;
 const ContactPage: React.FC = () => {
   return (
-    <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
+    <Box component="main" sx={{ flexGrow: 1, p: 3, fontFamily: 'Gill Sans', }}>
+      <div style={{textAlign:'center'}}>
       <Typography
         variant="h4"
         sx={{
-          mb: 2,
+          mb: 1,
           fontWeight: 'bold' // Applying bold font weight
         }}
       >
         Contact
       </Typography>
-      <Typography variant="h6" component="h1" sx={{ color: 'gray', mb: 2 }}>
+      <Typography variant="h6" component="h1" sx={{ color: 'gray', mb: 1 }}>
         We are here to help.
       </Typography>
+      </div>
       <Grid container spacing={6}>
         <Grid item xs={12} md={6}>
           <Card
             sx={{
               padding: '30px',
-              marginTop: '40px',
+              marginTop: '70px',
               backgroundColor: 'transparent',
               boxShadow: 'none',
               border: 'none'
@@ -38,7 +40,7 @@ const ContactPage: React.FC = () => {
           >
             <Box
               sx={{
-                ml: 10,
+                ml: 14,
                 display: 'flex',
                 flexDirection: 'column',
                 alignItems: 'center', // This keeps the whole group centered vertically
@@ -54,13 +56,13 @@ const ContactPage: React.FC = () => {
                   justifyContent: 'flex-start' // Changes here to align items to the left
                 }}
               >
-                <Typography variant="h6">Contact OpenAgent</Typography>
+                <Typography variant="h5">Contact OpenAgent</Typography>
               </Box>
               <Box
                 sx={{
                   display: 'flex',
                   alignItems: 'center',
-                  mt: 3,
+                  mt: 4,
                   width: '100%',
                   justifyContent: 'flex-start' // Aligns items to the left
                 }}

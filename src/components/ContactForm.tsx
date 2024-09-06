@@ -1,5 +1,5 @@
 // src/components/ContactForm.tsx
-import React from 'react';
+import React, { useState } from 'react';
 import { useFormik } from 'formik';
 import * as yup from 'yup';
 import {
@@ -11,10 +11,16 @@ import {
   InputLabel,
   Select,
   MenuItem,
-  FormHelperText
+  FormHelperText,
+  DialogActions,
+  DialogContent,
+  Box,
+  Dialog
 } from '@mui/material';
 import { allCountries } from 'country-telephone-data';
 import { formatDate } from '../untils/dateUtils';
+import { addContact } from '../untils/apiService';
+import successIcon from '../assets/image/correct.png'
 
 interface ContactFormValues {
   firstName: string;
@@ -36,6 +42,13 @@ const validationSchema = yup.object({
 });
 
 const ContactForm: React.FC = () => {
+  const [open, setOpen] = useState(false); // State to manage dialog visibility
+  const [dialogMessage, setDialogMessage] = useState(''); 
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
   const formik = useFormik<ContactFormValues>({
     initialValues: {
       firstName: '',
@@ -47,18 +60,27 @@ const ContactForm: React.FC = () => {
       time: ''
     },
     validationSchema: validationSchema,
-    onSubmit: values => {
-      const combinedPhone = `${values.countryCode} ${values.phone}`;
-      const currentTime = formatDate(new Date());
+    onSubmit: async (values, { setSubmitting, resetForm }) => {
+    console.log(formik.errors); // Log current errors
 
-      const submissionData = {
-        ...values,
-        phone: combinedPhone,
-        time: currentTime
-      };
+    const combinedPhone = `${values.countryCode} ${values.phone}`;
+    const currentTime = formatDate(new Date());
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const { countryCode, ...rest } = values;
+    const submissionData = { ...rest, phone: combinedPhone, time: currentTime };
 
-      console.log(submissionData);
+    try {
+      const response = await addContact(submissionData);
+      setDialogMessage('Request successfully submitted!');
+      setOpen(true);
+      resetForm();
+      console.log('Contact successfully added:', response);
+    } catch (error) {
+      console.error('Error adding contact:', error);
+    } finally {
+      setSubmitting(false); 
     }
+  }
   });
 
   return (
@@ -183,6 +205,41 @@ const ContactForm: React.FC = () => {
           </Grid>
         </Grid>
       </form>
+      {/* Success/Failure Dialog */}
+      <Dialog
+        open={open}
+        onClose={handleClose}
+        sx={{
+          '& .MuiDialog-paper': {
+            borderRadius: '20px', // More round border
+            maxWidth: '800px', // Set dialog width (make it larger)
+            padding: '20px'
+          }
+        }}
+      >
+        {/* Centered image */}
+        <Box display="flex" justifyContent="center" mb={2}>
+          <img src={successIcon} alt="Success Icon" style={{ width: '100px', height: '100px' }} />
+        </Box>
+        
+        <DialogContent>
+          <div style={{ textAlign: 'center' }}>
+          <h3>Thank you!</h3>
+          <p>{dialogMessage}</p>
+          </div>
+        </DialogContent>
+        <DialogActions sx={{ justifyContent: 'center' }}> {/* Center the button */}
+          <Button onClick={handleClose} variant="contained" sx={{
+                backgroundColor: 'black', 
+                color: 'white', 
+                '&:hover': {
+                  backgroundColor: 'rgba(0, 0, 0, 0.8)' 
+                }
+              }}>
+            OK
+          </Button>
+        </DialogActions>
+      </Dialog>
     </Card>
   );
 };

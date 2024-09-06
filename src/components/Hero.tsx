@@ -1,7 +1,7 @@
 import React from 'react';
 import heroImage from '../assets/image/hero.png'; // Ensure the path is correct
 import { Grid, Box, Typography, Button, useMediaQuery, useTheme } from '@mui/material'; // Import necessary MUI components
-import DownloadIcon from '@mui/icons-material/Download'; // Example MUI icon
+
 import GitHubIcon from '@mui/icons-material/GitHub'; // Example MUI icon
 
 const Hero: React.FC = () => {
@@ -28,31 +28,17 @@ const Hero: React.FC = () => {
             sell and own
           </Typography>
 
-          <Box mt={3} display="flex" flexDirection={{ xs: 'column', sm: 'row' }} gap={2}>
-            {/* Download Button */}
-            <Button
-              variant="contained"
-              color="primary"
-              href="https://web3templates.com/templates/astroship-starter-website-template-for-astro"
-              target="_blank"
-              rel="noopener noreferrer"
-              startIcon={<DownloadIcon />}
-              fullWidth={isSmallScreen || isMediumScreen}
-              sx={{ py: 1.5 }}
-            >
-              Download for Free
-            </Button>
-
+          <Box mt={3} textAlign='center'>
             {/* GitHub Repo Button */}
             <Button
               variant="outlined"
               color="primary"
-              href="https://github.com/surjithctly/astroship"
+              href="https://github.com/HongyuYang296/openAgent-react.git"
               target="_blank"
               rel="noopener noreferrer"
               startIcon={<GitHubIcon />}
               fullWidth={isSmallScreen || isMediumScreen}
-              sx={{ py: 1.5 }}
+              sx={{ py: 1.5}}
             >
               GitHub Repo
             </Button>

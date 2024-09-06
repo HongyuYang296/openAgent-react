@@ -5,6 +5,7 @@ import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import DeleteIcon from '@mui/icons-material/Delete';
 
 interface Data {
+    id: number;
   firstName: string;
   lastName: string;
   email: string;
@@ -16,9 +17,11 @@ interface Data {
 
 interface ActionMenuProps {
   data: Data;
+  updateContactStatusToVerified: (id: number) => Promise<void>; 
+  deleteContacts: (id: number) => Promise<void>; 
 }
 
-const ActionMenu: React.FC<ActionMenuProps> = ({ data }) => {
+const ActionMenu: React.FC<ActionMenuProps> = ({ data, updateContactStatusToVerified, deleteContacts }) => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
 
@@ -31,12 +34,12 @@ const ActionMenu: React.FC<ActionMenuProps> = ({ data }) => {
   };
 
   const handleMarkVerified = () => {
-    alert('Marking ' + data.firstName + ' as verified');
+    updateContactStatusToVerified(data.id);
     handleClose();
   };
 
   const handleDelete = () => {
-    alert('Deleting ' + data.firstName);
+    deleteContacts(data.id);
     handleClose();
   };
 
@@ -46,7 +49,7 @@ const ActionMenu: React.FC<ActionMenuProps> = ({ data }) => {
         <MoreVertIcon />
       </IconButton>
       <Menu id="action-menu" anchorEl={anchorEl} keepMounted open={open} onClose={handleClose}>
-        {data.status === 'Inactive' && (
+        {data.status === 'Unverified' && (
           <MenuItem onClick={handleMarkVerified}>
             <ListItemIcon>
               <CheckCircleIcon />
