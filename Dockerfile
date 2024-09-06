@@ -13,8 +13,8 @@ RUN npm install
 # Step 5: Copy the rest of the source code
 COPY . .
 
-# Step 6: Expose the port that Vite or React will run on
-EXPOSE 5000
+# Step 6: Expose the port that Vite will run on (usually 5173)
+EXPOSE 5173
 
-# Step 7: Run the development server (or you can use `npm run build` and `npm run start` for production)
-CMD ["npm", "run", "dev"]
+# Step 7: Run the Vite development server with the --host flag to expose it
+CMD ["npm", "run", "dev", "--", "--host"]
